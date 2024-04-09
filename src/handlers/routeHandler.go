@@ -2,29 +2,24 @@ package handlers
 
 import (
 	"github.com/CrazyCatViking/quiz-me/src/ioc"
-	"github.com/labstack/echo/v4"
 )
 
 type RouteHandler interface {
-  HandleRoute(context CustomContext) error 
+  HandleRoute() error 
 }
 
-func RouteHandlerMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
-  return func(c echo.Context) error {
-    cc := c.(*CustomContext)
-
-    path := cc.Request().URL.Path
-
-    result, ok := ioc.ResolveRequestHandler[RouteHandler](cc.scope, path)
-
-    if !ok {
-      return next(cc)
-    }
-
-    return (*result).HandleRoute(*cc)
-  }  
+type RouteManager struct {
+  container *ioc.Container
 }
 
-func RegisterGet(route string, handler interface{}, container *ioc.Container) {
-  ioc.RegisterRouteHandler[RouteHandler](container, handler, route)
+func (r *RouteManager) RegisterGet(route string, handler interface{}) {
+  ioc.RegisterRouteHandler[RouteHandler](r.container, handler, route)
+}
+
+func (r *RouteManager) RegisterPost(route string, handler interface{}) {
+  ioc.RegisterRouteHandler[RouteHandler](r.container, handler, route)
+}
+
+func NewRouteManager(container *ioc.Container) *RouteManager {
+  return &RouteManager{container}
 }

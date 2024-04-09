@@ -1,7 +1,15 @@
 package handlers
 
-import "github.com/labstack/echo/v4"
+import (
+	"github.com/CrazyCatViking/quiz-me/src/db"
+)
 
-func HandleLogin(c echo.Context) error {
-  return nil
+type LoginHandler struct {
+  db *db.DbContext
 }
+
+func NewLoginHandler(db *db.DbContext) *LoginHandler {
+  return &LoginHandler {
+    db: db,
+  }
+} 

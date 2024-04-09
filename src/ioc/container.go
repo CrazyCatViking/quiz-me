@@ -1,7 +1,6 @@
 package ioc
 
 import (
-	"fmt"
 	"reflect"
 	"strings"
 )
@@ -83,6 +82,11 @@ func RegisterSingleton[t interface{}](c *Container, constructor interface{}) {
   c.register(typeName, constructor, Singleton)
 }
 
+func UseInstance[t interface{}](c *ContainerScope, instance interface{}) {
+  typeName := getTypeName[t]()
+  c.instances[typeName] = reflect.ValueOf(instance)
+}
+
 func RegisterRouteHandler[t interface{}](
   c *Container,
   constructor interface{},
@@ -99,7 +103,7 @@ func ResolveRequestHandler[T interface{}](scope *ContainerScope, route string) (
   key := strings.Join([]string{typeName, route}, "-")
 
   constructor, ok := scope.mainContainer.mappings[key]
-  
+       
   if !ok { return nil, false }
 
   result, ok := createInstance(scope, constructor)
@@ -168,10 +172,15 @@ func resolveDependecy(scope *ContainerScope, t reflect.Type) (reflect.Value, boo
   }
 
   constructor, ok := scope.mainContainer.mappings[typeName]
-  
-  if !ok { return reflect.Value{}, false }
 
-  if constructor.scope == Singleton {
+  if !ok {
+    result, ok := scope.instances[typeName]
+    if ok {
+      return result, true
+    }
+
+    return reflect.Value{}, false
+  } else if constructor.scope == Singleton {
     result, ok := scope.mainContainer.singletons[typeName]
     if ok {
       return result, true
