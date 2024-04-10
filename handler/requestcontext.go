@@ -1,12 +1,13 @@
-package handlers
+package handler
 
 import "github.com/CrazyCatViking/quiz-me/model"
 
+
 type RequestContext struct {
-  HttpRequestContext *models.CustomContext
+  HttpRequestContext *model.CustomContext
 }
 
-func NewRequestContext(httpRequestContext *models.CustomContext) *RequestContext {
+func NewRequestContext(httpRequestContext *model.CustomContext) *RequestContext {
   return &RequestContext {
     HttpRequestContext: httpRequestContext,
   }

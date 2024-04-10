@@ -24,5 +24,6 @@ func Init() *DbContext {
 }
 
 func Migrate(db *gorm.DB) {
-  db.AutoMigrate(&models.User{})
+  db.AutoMigrate(&model.User{})
+  db.AutoMigrate(&model.Quiz{})
 }

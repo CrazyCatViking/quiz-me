@@ -11,7 +11,7 @@ func CreateCustomContextMiddleware(container *ioc.Container) echo.MiddlewareFunc
 
   return func(next echo.HandlerFunc) echo.HandlerFunc {
     return func(c echo.Context) error {
-      cc := models.NewCustomContext(c, scope)
+      cc := model.NewCustomContext(c, scope)
       return next(cc)
     }
   }

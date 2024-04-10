@@ -11,7 +11,7 @@ import (
 
 func RouteHandlerMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
   return func(c echo.Context) error {
-    cc := c.(*models.CustomContext)
+    cc := c.(*model.CustomContext)
 
     method := cc.Request().Method
     path := cc.Request().URL.Path
@@ -20,9 +20,9 @@ func RouteHandlerMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 
     fmt.Println(route)
  
-    requestContext := handlers.NewRequestContext(cc)
+    requestContext := handler.NewRequestContext(cc)
  
-    ioc.UseInstance[handlers.RequestContext](cc.Scope, requestContext)
+    ioc.UseInstance[handler.RequestContext](cc.Scope, requestContext)
 
     result, ok := cc.Scope.ResolveRouteHandler(route)
 

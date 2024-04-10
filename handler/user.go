@@ -1,4 +1,4 @@
-package handlers
+package handler
 
 import (
 	"fmt"
@@ -9,7 +9,7 @@ import (
 )
 
 func ShowUser(db *db.DbContext, requestContext *RequestContext) error {
-  var usr models.User
+  var usr model.User
   db.Db.First(&usr)
 
   fmt.Println(usr)

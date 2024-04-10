@@ -14,11 +14,10 @@ func main() {
  
   ioc.RegisterSingleton[db.DbContext](container, db.Init)
 
-  routeManager := handlers.NewRouteManager(container) 
+  routeManager := handler.NewRouteManager(container) 
 
-  // routeManager.RegisterGet("/login", handlers.NewLoginHandler)
-  routeManager.RegisterGet("/", handlers.ShowUser)
-  routeManager.RegisterGet("/quiz-studio", handlers.RenderQuizStudio)
+  routeManager.RegisterGet("/", handler.ShowUser)
+  routeManager.RegisterGet("/quiz-studio", handler.RenderQuizStudio)
 
   app.Use(middleware.CreateCustomContextMiddleware(container))
   app.Use(middleware.RouteHandlerMiddleware)

@@ -1,7 +1,29 @@
 package quizstudio
 
-templ MainPage() {
-  <div>
-    <h1>Quiz Studio Main Page</h1>
-  </div>
+import (
+  "github.com/CrazyCatViking/quiz-me/template/layout"
+	"github.com/CrazyCatViking/quiz-me/model"
+)
+
+css QuizList() {
+  display: flex;
+  gap: 1rem;
 }
+
+templ MainPage(quizzes []model.Quiz) {
+  @layout.Base() {
+    <div>
+      <h1>Quiz Studio Main Page</h1>
+    </div>
+
+    <div class={ QuizList() }>
+      for _, quiz := range quizzes {
+        <div>
+          <h2>{ quiz.Name }</h2>
+          <p>{ quiz.Description }</p>
+         </div>
+      }
+    </div>
+  }
+}
+
