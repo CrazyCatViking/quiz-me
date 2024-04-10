@@ -1,7 +1,7 @@
 package db
 
 import (
-	"github.com/CrazyCatViking/quiz-me/models"
+	"github.com/CrazyCatViking/quiz-me/model"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"github.com/CrazyCatViking/quiz-me/templates/login"
+	"github.com/CrazyCatViking/quiz-me/template/login"
 )
 
 type LoginHandler struct {

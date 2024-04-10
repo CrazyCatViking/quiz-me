@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/CrazyCatViking/quiz-me/db"
-	"github.com/CrazyCatViking/quiz-me/handlers"
+	"github.com/CrazyCatViking/quiz-me/handler"
 	"github.com/CrazyCatViking/quiz-me/ioc"
 	"github.com/CrazyCatViking/quiz-me/middleware"
 	"github.com/labstack/echo/v4"
@@ -16,8 +16,9 @@ func main() {
 
   routeManager := handlers.NewRouteManager(container) 
 
-  routeManager.RegisterGet("/login", handlers.NewLoginHandler)
-  routeManager.RegisterGet("/", handlers.NewUserHandler)
+  // routeManager.RegisterGet("/login", handlers.NewLoginHandler)
+  routeManager.RegisterGet("/", handlers.ShowUser)
+  routeManager.RegisterGet("/quiz-studio", handlers.RenderQuizStudio)
 
   app.Use(middleware.CreateCustomContextMiddleware(container))
   app.Use(middleware.RouteHandlerMiddleware)

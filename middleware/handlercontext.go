@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"github.com/CrazyCatViking/quiz-me/ioc"
-	"github.com/CrazyCatViking/quiz-me/models"
+	"github.com/CrazyCatViking/quiz-me/model"
 	"github.com/labstack/echo/v4"
 )
 

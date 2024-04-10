@@ -13,11 +13,11 @@ type RouteManager struct {
 }
 
 func (r *RouteManager) RegisterGet(route string, handler interface{}) {
-  ioc.RegisterRouteHandler[RouteHandler](r.container, handler, route)
+  r.container.RegisterRouteHandler(handler, "GET" + route)
 }
 
 func (r *RouteManager) RegisterPost(route string, handler interface{}) {
-  ioc.RegisterRouteHandler[RouteHandler](r.container, handler, route)
+  r.container.RegisterRouteHandler(handler, "POST" + route)
 }
 
 func NewRouteManager(container *ioc.Container) *RouteManager {

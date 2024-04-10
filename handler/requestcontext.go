@@ -1,6 +1,6 @@
 package handlers
 
-import "github.com/CrazyCatViking/quiz-me/models"
+import "github.com/CrazyCatViking/quiz-me/model"
 
 type RequestContext struct {
   HttpRequestContext *models.CustomContext

@@ -2,7 +2,6 @@ package ioc
 
 import (
 	"reflect"
-	"strings"
 )
 
 type RegistrationScope int64
@@ -85,34 +84,6 @@ func RegisterSingleton[t interface{}](c *Container, constructor interface{}) {
 func UseInstance[t interface{}](c *ContainerScope, instance interface{}) {
   typeName := getTypeName[t]()
   c.instances[typeName] = reflect.ValueOf(instance)
-}
-
-func RegisterRouteHandler[t interface{}](
-  c *Container,
-  constructor interface{},
-  route string,
-) {
-  typeName := getTypeName[t]()
-  key := strings.Join([]string{typeName, route}, "-")
-
-  c.register(key, constructor, Transient)
-}
-
-func ResolveRequestHandler[T interface{}](scope *ContainerScope, route string) (*T, bool) {
-  typeName := getTypeName[T]()
-  key := strings.Join([]string{typeName, route}, "-")
-
-  constructor, ok := scope.mainContainer.mappings[key]
-       
-  if !ok { return nil, false }
-
-  result, ok := createInstance(scope, constructor)
-
-  if !ok { return nil, false }
-  
-  instance := result.Interface().(T)
-
-  return &instance, true
 }
 
 func Resolve[T interface{}](scope *ContainerScope) *T {
