@@ -1,0 +1,35 @@
+package base
+
+templ Base() {
+  <head>
+    <script src="https://unpkg.com/htmx.org@latest"></script>
+    <title>QuizMe Daddy!</title>
+  </head>
+  <html>
+    <body class={ "main-container" }>
+      { children... }
+    </body>
+  </html>
+
+  <style>
+    :root {
+      --off-white: #f8f8f8;
+      --white: #ffffff;
+      --blue50: #f0f9ff;
+      --blue100: #e0f3fe;
+      --blue200: #bae8fd;
+      --blue300: #7ed6fb;
+      --blue400: #39c1f7;
+      --blue500: #0faae8;
+      --blue600: #0391d3;
+      --blue700: #046da0;
+      --blue800: #085c84;
+      --blue900: #0c4c6e;
+      --blue950: #083049;
+    }
+
+    .main-container {
+      background-color: var(--off-white);
+    }
+  </style>
+}

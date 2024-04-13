@@ -1,0 +1,41 @@
+package menu
+
+templ MenuItem(label string, path string) {
+  <a href={ templ.SafeURL(path) } class={ "menu-item" }>
+    { label }
+  </a>
+
+  <style>    
+    .menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      heigth: 2rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+
+      color: black;
+      text-decoration: none;
+
+      &:hover {
+        background-color: var(--blue300);
+      }
+    }
+  </style>
+}
+
+templ TopMenu() {
+  <div class={ "menu" }>
+    @MenuItem("Home", "/")
+    @MenuItem("Quiz-Studio", "/quiz-studio")
+  </div>
+  
+  <style>
+    .menu {
+      display: flex;
+      height: 2rem;
+      background-color: var(--blue400);
+    }
+  </style>
+}

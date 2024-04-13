@@ -1,0 +1,15 @@
+package component
+
+templ Column() {
+  <div class={ "column" }>
+    { children... }
+  </div>
+
+  <style>
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+  </style>
+}

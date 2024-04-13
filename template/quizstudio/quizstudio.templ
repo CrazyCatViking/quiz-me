@@ -1,29 +1,44 @@
 package quizstudio
 
 import (
-  "github.com/CrazyCatViking/quiz-me/template/layout"
 	"github.com/CrazyCatViking/quiz-me/model"
+	"github.com/CrazyCatViking/quiz-me/template/layout"
 )
 
-css QuizList() {
-  display: flex;
-  gap: 1rem;
-}
-
 templ MainPage(quizzes []model.Quiz) {
-  @layout.Base() {
+  @layout.Root() {
     <div>
       <h1>Quiz Studio Main Page</h1>
     </div>
 
-    <div class={ QuizList() }>
+    <div class={ "quiz-list" }>
       for _, quiz := range quizzes {
-        <div>
+        <div class={ "quiz-card" }>
           <h2>{ quiz.Name }</h2>
           <p>{ quiz.Description }</p>
          </div>
       }
     </div>
+
+    <style>
+      .quiz-list {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .quiz-card {
+        border: 1px solid black;
+        border-radius: 4px;
+        color: white;
+        background-color: var(--blue600);
+        padding: 1rem;
+
+        &:hover {
+          background-color: var(--blue700);
+        }
+      }
+    </style>
   }
 }
+
 

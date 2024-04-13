@@ -1,0 +1,12 @@
+package layout
+
+import "github.com/CrazyCatViking/quiz-me/template/menu"
+import "github.com/CrazyCatViking/quiz-me/template/base"
+
+templ Root() {
+  @base.Base() {
+    @menu.TopMenu()
+    
+    { children... } 
+  }
+}
